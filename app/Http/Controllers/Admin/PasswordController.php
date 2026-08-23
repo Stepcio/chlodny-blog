@@ -26,6 +26,6 @@ class PasswordController extends Controller
             'password' => $request->string('password'),
         ]);
 
-        return redirect()->route('admin.password.edit')->with('status', 'Password updated.');
+        return redirect()->route('admin.password.edit')->with('status', 'Hasło zaktualizowane.');
     }
 }

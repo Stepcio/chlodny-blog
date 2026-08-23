@@ -39,7 +39,7 @@ class ShopController extends Controller
 
         Shop::create($data);
 
-        return redirect()->route('admin.shops.index')->with('status', 'Shop created.');
+        return redirect()->route('admin.shops.index')->with('status', 'Lodziarnia dodana.');
     }
 
     public function edit(Shop $shop): View
@@ -66,7 +66,7 @@ class ShopController extends Controller
 
         $shop->update($data);
 
-        return redirect()->route('admin.shops.index')->with('status', 'Shop updated.');
+        return redirect()->route('admin.shops.index')->with('status', 'Lodziarnia zaktualizowana.');
     }
 
     public function destroy(Shop $shop): RedirectResponse
@@ -77,7 +77,7 @@ class ShopController extends Controller
 
         $shop->delete();
 
-        return redirect()->route('admin.shops.index')->with('status', 'Shop deleted.');
+        return redirect()->route('admin.shops.index')->with('status', 'Lodziarnia usunięta.');
     }
 
     private function uniqueSlug(string $name): string

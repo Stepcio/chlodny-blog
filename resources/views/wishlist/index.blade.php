@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Wishlist')
+@section('title', 'Lista życzeń')
 
 @section('content')
     <div class="max-w-3xl mx-auto px-4 py-12">
-        <h1 class="text-3xl font-bold text-stone-800">📝 Wishlist</h1>
-        <p class="text-stone-500 mt-2">Ice cream shops I still want to check out.</p>
+        <h1 class="text-3xl font-bold text-stone-800">📝 Lista życzeń</h1>
+        <p class="text-stone-500 mt-2">Lodziarnie, które wciąż chcę sprawdzić.</p>
 
         @if ($shops->isEmpty())
-            <p class="text-stone-500 mt-8">Nothing on the list right now.</p>
+            <p class="text-stone-500 mt-8">Na razie nic na liście.</p>
         @else
             <ul class="divide-y divide-stone-100 bg-white rounded-2xl border border-stone-100 overflow-hidden mt-8">
                 @foreach ($shops as $shop)

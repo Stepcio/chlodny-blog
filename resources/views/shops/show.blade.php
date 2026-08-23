@@ -13,9 +13,9 @@
 
     <div class="max-w-3xl mx-auto px-4 py-10">
         @if ($shop->status === 'visited')
-            <a href="{{ route('reviews.index') }}" class="text-sm text-stone-400 hover:text-pink-600 transition">&larr; All Reviews</a>
+            <a href="{{ route('reviews.index') }}" class="text-sm text-stone-400 hover:text-pink-600 transition">&larr; Wszystkie recenzje</a>
         @else
-            <a href="{{ route('wishlist.index') }}" class="text-sm text-stone-400 hover:text-pink-600 transition">&larr; Wishlist</a>
+            <a href="{{ route('wishlist.index') }}" class="text-sm text-stone-400 hover:text-pink-600 transition">&larr; Lista życzeń</a>
         @endif
 
         <div class="flex items-start justify-between gap-4 mt-4">
@@ -36,7 +36,7 @@
                 <span>{{ $shop->address }}</span>
             @endif
             @if ($shop->website)
-                <a href="{{ $shop->website }}" target="_blank" rel="noopener" class="text-pink-600 hover:underline">Website</a>
+                <a href="{{ $shop->website }}" target="_blank" rel="noopener" class="text-pink-600 hover:underline">Strona internetowa</a>
             @endif
         </div>
 
@@ -48,11 +48,11 @@
             </div>
 
             @if ($shop->visited_at)
-                <p class="text-sm text-stone-400 mt-8">Visited {{ $shop->visited_at->format('F Y') }}</p>
+                <p class="text-sm text-stone-400 mt-8">Odwiedzone: {{ $shop->visited_at->translatedFormat('F Y') }}</p>
             @endif
         @else
             <div class="mt-8 rounded-2xl border border-dashed border-stone-200 p-6 text-stone-500">
-                🍦 Haven't been yet &mdash; this one's still on the list!
+                🍦 Jeszcze tu nie byłem &mdash; to wciąż na liście!
             </div>
         @endif
     </div>

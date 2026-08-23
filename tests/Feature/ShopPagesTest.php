@@ -56,6 +56,6 @@ class ShopPagesTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Someday Shop');
-        $response->assertSee("still on the list");
+        $response->assertSee('wciąż na liście');
     }
 }
