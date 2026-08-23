@@ -15,11 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Default local dev password is "password" (Laravel's UserFactory default) — change it via /admin/password.
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Chris',
+            'email' => 'eloquent160@gmail.com',
         ]);
 
         $this->call(ShopSeeder::class);
