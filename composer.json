@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "stepcio/chlodny-kacik",
+    "name": "stepcio/chlodny-blog",
     "type": "project",
     "description": "Ranking and reviews of Warsaw's best ice cream shops.",
     "keywords": ["laravel", "framework"],

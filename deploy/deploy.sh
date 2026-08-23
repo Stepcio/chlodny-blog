@@ -16,4 +16,4 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-sudo systemctl restart php8.3-fpm
+sudo systemctl restart php8.4-fpm

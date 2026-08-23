@@ -1,6 +1,6 @@
 {
     "$schema": "https://www.schemastore.org/package.json",
-    "name": "chlodny-kacik",
+    "name": "chlodny-blog",
     "private": true,
     "type": "module",
     "scripts": {
