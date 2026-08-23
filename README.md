@@ -19,6 +19,7 @@ php artisan key:generate
 
 touch database/database.sqlite
 php artisan migrate --seed
+php artisan storage:link
 
 npm run build
 php artisan serve
@@ -30,9 +31,10 @@ For active frontend development, run `npm run dev` in a separate terminal instea
 
 ## What's here
 
-- **`Shop` model** (`app/Models/Shop.php`) — one shop per row, covering both the curated "best of" list (`is_featured`) and full blog-style entries (`body`, filled in once `status` is `visited`).
-- **Routes**: `/` (featured shops), `/shops` (full list), `/shops/{shop}` (single shop write-up).
-- **Content**: for now, shops are added/edited via `database/seeders/ShopSeeder.php` or `php artisan tinker` — no admin UI yet.
+- **`Shop` model** (`app/Models/Shop.php`) — one shop per row, covering the curated ranking (`is_featured`), the wishlist (`status = want_to_visit`), and full blog-style entries (`body`, filled in once `status` is `visited`), including an optional cover photo (`cover_image`).
+- **Public pages**: `/` (bio + favorite shops), `/reviews` (all visited shops), `/rankings` (numbered ranking of featured shops), `/wishlist` (shops not yet visited), `/shops/{shop}` (single shop write-up).
+- **Admin** (`/admin/shops`, behind login): full CRUD for shops, including cover photo upload, plus a password-change page at `/admin/password`.
+- **Login**: seeded admin account is `eloquent160@gmail.com` / `password` (Laravel's standard local-dev placeholder — change it from `/admin/password` after your first login, since this is a local-only dev database).
 
 ## Tests
 
