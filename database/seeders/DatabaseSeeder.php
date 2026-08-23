@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         // fake() internally even for overridden fields, and fakerphp/faker is
         // a dev-only dependency unavailable in production (--no-dev).
         User::create([
-            'name' => 'Chris',
+            'name' => 'Krzysiek',
             'email' => 'eloquent160@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // change via /admin/password after first login

@@ -6,7 +6,7 @@
     <section class="bg-gradient-to-b from-pink-50 to-cream-50">
         <div class="max-w-2xl mx-auto px-4 py-16 text-center">
             <div class="text-5xl">👋</div>
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-stone-800 mt-4">Cześć, jestem Chris</h1>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-stone-800 mt-4">Cześć, jestem Krzysiek</h1>
             <p class="mt-4 text-stone-500 max-w-xl mx-auto">
                 Lody to moje hobby &mdash; tutaj zapisuję najlepsze gałki, jakie oferuje Warszawa, lodziarnia po lodziarni.
             </p>
