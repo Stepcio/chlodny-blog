@@ -46,7 +46,7 @@ sudo apt install -y nginx mariadb-server \
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt install -y nodejs
 ```
 
@@ -148,8 +148,12 @@ curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloud
 sudo dpkg -i cloudflared.deb
 
 cloudflared tunnel login   # opens a URL — open it on any device logged into your Cloudflare account
-cloudflared tunnel create chlodny-blog
+cloudflared tunnel create chlodny-pi
 ```
+
+`chlodny-pi` is one shared tunnel for the whole Pi, not one per app — when
+chlodny-kacik is deployed later, it gets an extra ingress rule in the same
+`config.yml` below rather than its own tunnel.
 
 Note the tunnel UUID it prints, then:
 
@@ -159,7 +163,7 @@ sudo cp ~/.cloudflared/<TUNNEL_UUID>.json /etc/cloudflared/
 sudo cp deploy/cloudflared-config.yml /etc/cloudflared/config.yml
 sudo nano /etc/cloudflared/config.yml   # replace both <TUNNEL_UUID> placeholders
 
-cloudflared tunnel route dns chlodny-blog chlodny-blog.pl
+cloudflared tunnel route dns chlodny-pi chlodny-blog.pl
 
 sudo cloudflared service install
 sudo systemctl enable --now cloudflared
@@ -210,3 +214,9 @@ they're gone with the SD card.
   shows Active in Cloudflare and `ingress.hostname` matches exactly.
 - **Mixed content / http links**: confirm `APP_URL` is `https://` and
   `fastcgi_param HTTPS on;` is present in the Nginx vhost.
+- **`route dns` fails with an auth error, or creates a weird nested CNAME
+  like `otherdomain.pl.chlodny-blog.pl`**: `cloudflared tunnel login` scopes
+  `cert.pem` to only the one zone you pick in the browser during that login
+  — it does not cover every domain in the account. Back up the existing
+  `~/.cloudflared/cert.pem` (don't delete it), run `cloudflared tunnel
+  login` again and pick the zone you actually need, then retry `route dns`.

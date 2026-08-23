@@ -6,7 +6,7 @@ A running list of the best ice cream shops in Warsaw, plus a write-up for every 
 
 - PHP 8.4+ with the `openssl`, `mbstring`, `pdo_sqlite`, `sqlite3`, `curl`, `zip`, `fileinfo`, and `gd` extensions enabled
 - Composer
-- Node.js 20+ and npm
+- Node.js 22+ and npm
 
 ## Setup
 
