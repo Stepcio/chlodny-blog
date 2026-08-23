@@ -119,8 +119,13 @@ php artisan storage:link
 
 npm run build
 
-sudo chown -R www-data:www-data storage bootstrap/cache
+sudo chown -R "$USER":www-data storage bootstrap/cache
+sudo chmod -R 2775 storage bootstrap/cache
 ```
+
+(Owner is the deploy user, not `www-data` — ongoing deploys run `composer install`/`artisan` as
+this user and need to write here too. Group `www-data` plus the setgid bit keeps PHP-FPM able to
+write as well, and new files/dirs keep inheriting the group.)
 
 ## 6. Nginx + PHP-FPM
 
@@ -214,6 +219,16 @@ they're gone with the SD card.
   shows Active in Cloudflare and `ingress.hostname` matches exactly.
 - **Mixed content / http links**: confirm `APP_URL` is `https://` and
   `fastcgi_param HTTPS on;` is present in the Nginx vhost.
+- **`deploy/deploy.sh` fails on `composer install`/`artisan` with a
+  "Permission denied" writing to `storage/logs` or `bootstrap/cache`**: those
+  dirs need to stay owned by the deploy user (group `www-data`, mode `2775`)
+  per step 4/5 — if they ended up `www-data:www-data` instead, redo the
+  `chown`/`chmod` there.
+- **Re-seeding shops after editing `ShopSeeder.php`**: `php artisan db:seed`
+  re-runs the whole `DatabaseSeeder` (including the admin `User::create`,
+  which will hit a duplicate-email error if that user already exists). To
+  refresh just the shop rows: `DELETE FROM shops;` via `mysql`, then
+  `php artisan db:seed --class=ShopSeeder --force`.
 - **`route dns` fails with an auth error, or creates a weird nested CNAME
   like `otherdomain.pl.chlodny-blog.pl`**: `cloudflared tunnel login` scopes
   `cert.pem` to only the one zone you pick in the browser during that login
