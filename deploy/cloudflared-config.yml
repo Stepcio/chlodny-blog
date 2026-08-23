@@ -8,6 +8,6 @@ tunnel: <TUNNEL_UUID>
 credentials-file: /etc/cloudflared/<TUNNEL_UUID>.json
 
 ingress:
-  - hostname: ranking.chlodny-kacik.pl
+  - hostname: chlodny-blog.pl
     service: http://localhost:80
   - service: http_status:404

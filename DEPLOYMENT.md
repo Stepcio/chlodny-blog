@@ -1,11 +1,12 @@
 # Deployment — Raspberry Pi + Cloudflare Tunnel
 
-Runbook for putting the app on `ranking.chlodny-kacik.pl`, served from a
-Raspberry Pi 4 at home. No port forwarding, no static IP needed: Cloudflare
-Tunnel makes an outbound-only connection from the Pi to Cloudflare's edge,
-which terminates TLS and proxies the public hostname to it. The bare domain
-(`chlodny-kacik.pl`) is left unconfigured — it's reserved for the future
-physical shop's own site.
+Runbook for putting the app on `chlodny-blog.pl`, served from a Raspberry Pi 4
+at home. No port forwarding, no static IP needed: Cloudflare Tunnel makes an
+outbound-only connection from the Pi to Cloudflare's edge, which terminates
+TLS and proxies the public hostname to it. This is a dedicated domain,
+separate from `chlodny-kacik.pl` (the future physical/B2B business site) —
+kept deliberately separate so this ranking blog reads as an independent
+guide, not something the business runs.
 
 Stack on the Pi: Nginx + PHP-FPM 8.4 + MariaDB (MySQL-wire-compatible,
 lighter than Postgres/MySQL on a Pi's RAM, and in Raspberry Pi OS's own apt
@@ -15,7 +16,7 @@ repo) + cloudflared, all as systemd services.
 
 - Raspberry Pi OS (Bookworm or newer), reachable over SSH.
 - A Cloudflare account (free plan is enough).
-- Access to the chlodny-kacik.pl registrar account, to change nameservers.
+- Access to the chlodny-blog.pl registrar account, to change nameservers.
 
 Check the Pi's PHP version first:
 
@@ -92,7 +93,7 @@ Edit `.env`:
 APP_NAME="Chłodny Blog"
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://ranking.chlodny-kacik.pl
+APP_URL=https://chlodny-blog.pl
 
 DB_CONNECTION=mariadb
 DB_HOST=127.0.0.1
@@ -133,7 +134,7 @@ sudo systemctl enable --now php8.4-fpm
 
 ## 7. Point the domain at Cloudflare
 
-1. In the Cloudflare dashboard, **Add a site** → `chlodny-kacik.pl` → free plan.
+1. In the Cloudflare dashboard, **Add a site** → `chlodny-blog.pl` → free plan.
 2. Cloudflare shows two nameservers. At your `.pl` registrar, replace the
    existing nameservers with those two. Propagation is usually under an
    hour, sometimes longer for `.pl`.
@@ -158,7 +159,7 @@ sudo cp ~/.cloudflared/<TUNNEL_UUID>.json /etc/cloudflared/
 sudo cp deploy/cloudflared-config.yml /etc/cloudflared/config.yml
 sudo nano /etc/cloudflared/config.yml   # replace both <TUNNEL_UUID> placeholders
 
-cloudflared tunnel route dns chlodny-blog ranking.chlodny-kacik.pl
+cloudflared tunnel route dns chlodny-blog chlodny-blog.pl
 
 sudo cloudflared service install
 sudo systemctl enable --now cloudflared
@@ -175,7 +176,7 @@ systemctl status nginx php8.4-fpm mariadb cloudflared
 curl -I http://127.0.0.1   # should return a Laravel response, not an error
 ```
 
-Then visit `https://ranking.chlodny-kacik.pl` from anywhere. Log in at
+Then visit `https://chlodny-blog.pl` from anywhere. Log in at
 `/login` (seeded admin, see README) and change the password at
 `/admin/password` immediately since this is now a public site.
 

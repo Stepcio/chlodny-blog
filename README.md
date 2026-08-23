@@ -45,4 +45,4 @@ php artisan test
 ## Deployment
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for running this on a Raspberry Pi behind
-a Cloudflare Tunnel at `ranking.chlodny-kacik.pl`.
+a Cloudflare Tunnel at `chlodny-blog.pl`.
