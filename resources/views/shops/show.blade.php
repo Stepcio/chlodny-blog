@@ -1,0 +1,48 @@
+@extends('layouts.app')
+
+@section('title', $shop->name)
+
+@section('content')
+    <div class="h-48 sm:h-64 bg-gradient-to-br from-pink-200 via-rose-100 to-mint-200 flex items-center justify-center text-6xl">
+        🍨
+    </div>
+
+    <div class="max-w-3xl mx-auto px-4 py-10">
+        <a href="{{ route('shops.index') }}" class="text-sm text-stone-400 hover:text-pink-600 transition">&larr; All shops</a>
+
+        <div class="flex items-start justify-between gap-4 mt-4">
+            <h1 class="text-3xl font-bold text-stone-800">{{ $shop->name }}</h1>
+            @if ($shop->rating)
+                <span class="shrink-0 text-lg font-medium text-amber-500">{{ str_repeat('★', $shop->rating) }}{{ str_repeat('☆', 5 - $shop->rating) }}</span>
+            @endif
+        </div>
+
+        <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-stone-400 mt-2">
+            @if ($shop->district)
+                <span>📍 {{ $shop->district }}</span>
+            @endif
+            @if ($shop->address)
+                <span>{{ $shop->address }}</span>
+            @endif
+            @if ($shop->website)
+                <a href="{{ $shop->website }}" target="_blank" rel="noopener" class="text-pink-600 hover:underline">Website</a>
+            @endif
+        </div>
+
+        <p class="text-lg text-stone-600 mt-6">{{ $shop->description }}</p>
+
+        @if ($shop->status === 'visited' && $shop->body)
+            <div class="prose prose-stone max-w-none mt-6">
+                <p class="whitespace-pre-line">{{ $shop->body }}</p>
+            </div>
+
+            @if ($shop->visited_at)
+                <p class="text-sm text-stone-400 mt-8">Visited {{ $shop->visited_at->format('F Y') }}</p>
+            @endif
+        @else
+            <div class="mt-8 rounded-2xl border border-dashed border-stone-200 p-6 text-stone-500">
+                🍦 Haven't been yet &mdash; this one's still on the list!
+            </div>
+        @endif
+    </div>
+@endsection
