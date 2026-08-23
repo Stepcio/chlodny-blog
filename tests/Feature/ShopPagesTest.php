@@ -22,16 +22,16 @@ class ShopPagesTest extends TestCase
         $response->assertDontSee('Regular Shop');
     }
 
-    public function test_shops_index_lists_visited_and_want_to_visit_shops(): void
+    public function test_reviews_index_lists_only_visited_shops(): void
     {
         Shop::factory()->create(['name' => 'Visited Shop']);
         Shop::factory()->wantToVisit()->create(['name' => 'Wishlist Shop']);
 
-        $response = $this->get(route('shops.index'));
+        $response = $this->get(route('reviews.index'));
 
         $response->assertOk();
         $response->assertSee('Visited Shop');
-        $response->assertSee('Wishlist Shop');
+        $response->assertDontSee('Wishlist Shop');
     }
 
     public function test_shop_show_page_displays_review_body_for_visited_shop(): void
