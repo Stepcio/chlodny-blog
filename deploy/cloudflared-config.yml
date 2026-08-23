@@ -1,0 +1,13 @@
+# Cloudflare Tunnel ingress rules.
+#
+# Generated as a starting point after `cloudflared tunnel create chlodny-kacik`
+# — replace <TUNNEL_UUID> below with the UUID printed by that command, then
+# install as /etc/cloudflared/config.yml (see DEPLOYMENT.md).
+
+tunnel: <TUNNEL_UUID>
+credentials-file: /etc/cloudflared/<TUNNEL_UUID>.json
+
+ingress:
+  - hostname: ranking.chlodny-kacik.pl
+    service: http://localhost:80
+  - service: http_status:404

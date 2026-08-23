@@ -12,7 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Trusts the loopback hop from cloudflared, the only path into the app
+        // (no port-forwarded public interface exists), so forwarded headers
+        // from the Cloudflare Tunnel are honored for scheme/IP detection.
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

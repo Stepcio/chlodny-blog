@@ -41,3 +41,8 @@ For active frontend development, run `npm run dev` in a separate terminal instea
 ```bash
 php artisan test
 ```
+
+## Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for running this on a Raspberry Pi behind
+a Cloudflare Tunnel at `ranking.chlodny-kacik.pl`.
