@@ -36,6 +36,36 @@ class ShopCrudTest extends TestCase
         Storage::disk('public')->assertExists($shop->cover_image);
     }
 
+    public function test_admin_can_save_a_half_star_rating(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(route('admin.shops.store'), [
+            'name' => 'Half Star Shop',
+            'description' => 'Testing half stars.',
+            'status' => 'visited',
+            'rating' => 4.5,
+        ]);
+
+        $response->assertRedirect(route('admin.shops.index'));
+        $this->assertSame(4.5, Shop::firstWhere('name', 'Half Star Shop')->rating);
+    }
+
+    public function test_rating_must_be_a_half_star_increment(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(route('admin.shops.store'), [
+            'name' => 'Bad Rating Shop',
+            'description' => 'Testing invalid ratings.',
+            'status' => 'visited',
+            'rating' => 4.3,
+        ]);
+
+        $response->assertSessionHasErrors('rating');
+        $this->assertNull(Shop::firstWhere('name', 'Bad Rating Shop'));
+    }
+
     public function test_admin_can_update_a_shop(): void
     {
         $user = User::factory()->create();

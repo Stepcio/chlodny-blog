@@ -27,7 +27,13 @@
                         <tr>
                             <td class="px-4 py-3 font-medium text-stone-700">{{ $shop->name }}</td>
                             <td class="px-4 py-3 text-stone-500">{{ $shop->status === 'visited' ? 'Visited' : 'Want to visit' }}</td>
-                            <td class="px-4 py-3 text-amber-500">{{ $shop->rating ? str_repeat('★', $shop->rating) : '—' }}</td>
+                            <td class="px-4 py-3">
+                                @if ($shop->rating)
+                                    <x-star-rating :rating="$shop->rating" class="text-sm" />
+                                @else
+                                    <span class="text-stone-300">—</span>
+                                @endif
+                            </td>
                             <td class="px-4 py-3">{{ $shop->is_featured ? '✅' : '' }}</td>
                             <td class="px-4 py-3 text-right space-x-3">
                                 <a href="{{ route('admin.shops.edit', $shop) }}" class="text-pink-600 hover:underline">Edit</a>

@@ -35,7 +35,7 @@ class ShopSeeder extends Seeder
                 'description' => 'Long-running local favourite known for queues stretching down the street in summer.',
                 'status' => 'visited',
                 'is_featured' => true,
-                'rating' => 4,
+                'rating' => 4.5,
                 'visited_at' => now()->subMonth(),
                 'body' => "This is placeholder text so you can see how a full entry renders. Replace it with your own visit notes, photos, and impressions once you've been!",
             ],

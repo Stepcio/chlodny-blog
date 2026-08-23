@@ -21,7 +21,10 @@
         <div class="flex items-start justify-between gap-4 mt-4">
             <h1 class="text-3xl font-bold text-stone-800">{{ $shop->name }}</h1>
             @if ($shop->rating)
-                <span class="shrink-0 text-lg font-medium text-amber-500">{{ str_repeat('★', $shop->rating) }}{{ str_repeat('☆', 5 - $shop->rating) }}</span>
+                <span class="shrink-0 flex items-center gap-2">
+                    <x-star-rating :rating="$shop->rating" class="text-lg" />
+                    <span class="text-sm text-stone-400">{{ rtrim(rtrim(number_format($shop->rating, 1), '0'), '.') }}/5</span>
+                </span>
             @endif
         </div>
 

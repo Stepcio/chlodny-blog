@@ -22,7 +22,7 @@ class StoreShopRequest extends FormRequest
             'address' => ['nullable', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:500'],
             'body' => ['nullable', 'string'],
-            'rating' => ['nullable', 'integer', 'between:1,5'],
+            'rating' => ['nullable', 'numeric', 'between:0.5,5', 'multiple_of:0.5'],
             'status' => ['required', 'in:want_to_visit,visited'],
             'is_featured' => ['sometimes', 'boolean'],
             'visited_at' => ['nullable', 'date'],

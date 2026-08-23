@@ -31,7 +31,7 @@ class Shop extends Model
         return [
             'is_featured' => 'boolean',
             'visited_at' => 'date',
-            'rating' => 'integer',
+            'rating' => 'float',
         ];
     }
 

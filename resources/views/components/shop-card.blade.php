@@ -12,7 +12,7 @@
         <div class="flex items-start justify-between gap-2">
             <h3 class="font-semibold text-stone-800 group-hover:text-pink-600 transition">{{ $shop->name }}</h3>
             @if ($shop->rating)
-                <span class="shrink-0 text-sm font-medium text-amber-500">{{ str_repeat('★', $shop->rating) }}{{ str_repeat('☆', 5 - $shop->rating) }}</span>
+                <x-star-rating :rating="$shop->rating" class="shrink-0 text-sm" />
             @endif
         </div>
         @if ($shop->district)

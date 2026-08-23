@@ -27,7 +27,7 @@ class ShopFactory extends Factory
             'address' => $this->faker->streetAddress(),
             'description' => $this->faker->sentence(),
             'body' => $this->faker->paragraphs(3, true),
-            'rating' => $this->faker->numberBetween(1, 5),
+            'rating' => $this->faker->numberBetween(1, 10) / 2,
             'status' => 'visited',
             'is_featured' => false,
             'visited_at' => $this->faker->dateTimeBetween('-1 year')->format('Y-m-d'),

@@ -44,13 +44,9 @@
         @error('status') <p class="text-rose-500 text-xs mt-1">{{ $message }}</p> @enderror
     </div>
     <div>
-        <label for="rating" class="{{ $label }}">Rating</label>
-        <select name="rating" id="rating" class="{{ $field }}">
-            <option value="">—</option>
-            @for ($i = 1; $i <= 5; $i++)
-                <option value="{{ $i }}" @selected((string) old('rating', $shop->rating) === (string) $i)>{{ $i }}</option>
-            @endfor
-        </select>
+        <label for="rating" class="{{ $label }}">Rating (0.5&ndash;5, half-star steps)</label>
+        <input type="number" name="rating" id="rating" min="0.5" max="5" step="0.5"
+            value="{{ old('rating', $shop->rating) }}" placeholder="e.g. 4.5" class="{{ $field }}">
         @error('rating') <p class="text-rose-500 text-xs mt-1">{{ $message }}</p> @enderror
     </div>
     <div>

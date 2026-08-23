@@ -22,7 +22,7 @@
                                 @endif
                             </div>
                             @if ($shop->rating)
-                                <span class="shrink-0 text-sm font-medium text-amber-500">{{ str_repeat('★', $shop->rating) }}{{ str_repeat('☆', 5 - $shop->rating) }}</span>
+                                <x-star-rating :rating="$shop->rating" class="shrink-0 text-sm" />
                             @endif
                         </a>
                     </li>
