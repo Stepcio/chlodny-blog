@@ -4,27 +4,26 @@
 
 @section('content')
     <section class="bg-gradient-to-b from-pink-50 to-cream-50">
-        <div class="max-w-5xl mx-auto px-4 py-16 text-center">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-stone-800">
-                The best ice cream in <span class="text-pink-600">Warsaw</span>
-            </h1>
+        <div class="max-w-2xl mx-auto px-4 py-16 text-center">
+            <div class="text-5xl">👋</div>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-stone-800 mt-4">Hi, I'm Chris</h1>
             <p class="mt-4 text-stone-500 max-w-xl mx-auto">
-                A running list of the city's best scoops, plus a write-up of every ice cream shop I visit along the way.
+                Ice cream is my hobby &mdash; this is where I keep track of the best scoops Warsaw has to offer, one shop at a time.
             </p>
-            <a href="{{ route('shops.index') }}" class="inline-block mt-8 px-6 py-3 rounded-full bg-pink-600 text-white font-medium hover:bg-pink-700 transition">
-                See all shops
-            </a>
         </div>
     </section>
 
     <section class="max-w-5xl mx-auto px-4 py-12">
-        <h2 class="text-2xl font-bold text-stone-800 mb-6">🏆 Best of Warsaw</h2>
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-stone-800">🍦 My Favorite Ice Cream Shops</h2>
+            <a href="{{ route('rankings.index') }}" class="text-sm font-medium text-pink-600 hover:underline whitespace-nowrap">See full rankings &rarr;</a>
+        </div>
 
-        @if ($featuredShops->isEmpty())
-            <p class="text-stone-500">No featured shops yet &mdash; check back soon!</p>
+        @if ($favoriteShops->isEmpty())
+            <p class="text-stone-500">No favorites yet &mdash; check back soon!</p>
         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                @foreach ($featuredShops as $shop)
+                @foreach ($favoriteShops as $shop)
                     <x-shop-card :shop="$shop" />
                 @endforeach
             </div>

@@ -3,12 +3,20 @@
 @section('title', $shop->name)
 
 @section('content')
-    <div class="h-48 sm:h-64 bg-gradient-to-br from-pink-200 via-rose-100 to-mint-200 flex items-center justify-center text-6xl">
-        🍨
-    </div>
+    @if ($shop->cover_image)
+        <img src="{{ asset('storage/'.$shop->cover_image) }}" alt="{{ $shop->name }}" class="h-48 sm:h-64 w-full object-cover">
+    @else
+        <div class="h-48 sm:h-64 bg-gradient-to-br from-pink-200 via-rose-100 to-mint-200 flex items-center justify-center text-6xl">
+            🍨
+        </div>
+    @endif
 
     <div class="max-w-3xl mx-auto px-4 py-10">
-        <a href="{{ route('shops.index') }}" class="text-sm text-stone-400 hover:text-pink-600 transition">&larr; All shops</a>
+        @if ($shop->status === 'visited')
+            <a href="{{ route('reviews.index') }}" class="text-sm text-stone-400 hover:text-pink-600 transition">&larr; All Reviews</a>
+        @else
+            <a href="{{ route('wishlist.index') }}" class="text-sm text-stone-400 hover:text-pink-600 transition">&larr; Wishlist</a>
+        @endif
 
         <div class="flex items-start justify-between gap-4 mt-4">
             <h1 class="text-3xl font-bold text-stone-800">{{ $shop->name }}</h1>

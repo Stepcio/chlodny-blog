@@ -15,7 +15,9 @@
             </a>
             <nav class="flex items-center gap-6 text-sm font-medium">
                 <a href="{{ route('home') }}" class="hover:text-pink-600 transition {{ request()->routeIs('home') ? 'text-pink-600' : 'text-stone-600' }}">Home</a>
-                <a href="{{ route('shops.index') }}" class="hover:text-pink-600 transition {{ request()->routeIs('shops.*') ? 'text-pink-600' : 'text-stone-600' }}">All Shops</a>
+                <a href="{{ route('reviews.index') }}" class="hover:text-pink-600 transition {{ request()->routeIs('reviews.*') ? 'text-pink-600' : 'text-stone-600' }}">All Reviews</a>
+                <a href="{{ route('rankings.index') }}" class="hover:text-pink-600 transition {{ request()->routeIs('rankings.*') ? 'text-pink-600' : 'text-stone-600' }}">Rankings</a>
+                <a href="{{ route('wishlist.index') }}" class="hover:text-pink-600 transition {{ request()->routeIs('wishlist.*') ? 'text-pink-600' : 'text-stone-600' }}">Wishlist</a>
             </nav>
         </div>
     </header>

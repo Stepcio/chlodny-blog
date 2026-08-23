@@ -5,17 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Shop;
 use Illuminate\View\View;
 
-class HomeController extends Controller
+class RankingController extends Controller
 {
     public function index(): View
     {
-        $favoriteShops = Shop::featured()
+        $shops = Shop::featured()
             ->orderByDesc('rating')
-            ->limit(4)
             ->get();
 
-        return view('home', [
-            'favoriteShops' => $favoriteShops,
+        return view('rankings.index', [
+            'shops' => $shops,
         ]);
     }
 }

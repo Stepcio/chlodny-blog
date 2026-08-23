@@ -9,17 +9,12 @@ class ShopController extends Controller
 {
     public function index(): View
     {
-        $visitedShops = Shop::visited()
+        $shops = Shop::visited()
             ->orderByDesc('rating')
             ->get();
 
-        $wantToVisitShops = Shop::where('status', 'want_to_visit')
-            ->orderBy('name')
-            ->get();
-
-        return view('shops.index', [
-            'visitedShops' => $visitedShops,
-            'wantToVisitShops' => $wantToVisitShops,
+        return view('reviews.index', [
+            'shops' => $shops,
         ]);
     }
 

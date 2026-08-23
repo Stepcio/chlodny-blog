@@ -1,9 +1,13 @@
 @props(['shop'])
 
 <a href="{{ route('shops.show', $shop) }}" class="group block bg-white rounded-2xl border border-stone-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition overflow-hidden">
-    <div class="h-32 bg-gradient-to-br from-pink-200 via-rose-100 to-mint-200 flex items-center justify-center text-4xl">
-        🍨
-    </div>
+    @if ($shop->cover_image)
+        <img src="{{ asset('storage/'.$shop->cover_image) }}" alt="{{ $shop->name }}" class="h-32 w-full object-cover">
+    @else
+        <div class="h-32 bg-gradient-to-br from-pink-200 via-rose-100 to-mint-200 flex items-center justify-center text-4xl">
+            🍨
+        </div>
+    @endif
     <div class="p-4">
         <div class="flex items-start justify-between gap-2">
             <h3 class="font-semibold text-stone-800 group-hover:text-pink-600 transition">{{ $shop->name }}</h3>
